@@ -11,4 +11,3 @@ matrix = [
 func(matrix)
 print("--")
 func()
-

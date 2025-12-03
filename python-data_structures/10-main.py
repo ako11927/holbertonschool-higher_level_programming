@@ -12,4 +12,3 @@ while i < len(list_result):
         msg = "is not"
     print("{:d} {:s} divisible by 2".format(my_list[i], msg))
     i += 1
-
