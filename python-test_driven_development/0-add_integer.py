@@ -19,18 +19,28 @@ def add_integer(a, b=98):
 
     Raises:
         TypeError: If a or b is not an integer or float,
-        or if they are NaN or infinite values.
+        or if conversion to integer fails (NaN, Inf, or overflow).
     """
-    # Validate a
+
+    # validate type for a
     if not isinstance(a, (int, float)):
         raise TypeError("a must be an integer")
-    if isinstance(a, float) and (a != a or a in (float("inf"), float("-inf"))):
-        raise TypeError("a must be an integer")
 
-    # Validate b
+    # validate type for b
     if not isinstance(b, (int, float)):
         raise TypeError("b must be an integer")
-    if isinstance(b, float) and (b != b or b in (float("inf"), float("-inf"))):
+
+    # try integer conversion for a
+    try:
+        a = int(a)
+    except Exception:
+        raise TypeError("a must be an integer")
+
+    # try integer conversion for b
+    try:
+        b = int(b)
+    except Exception:
         raise TypeError("b must be an integer")
 
-    return int(a) + int(b)
+    return a + b
+
