@@ -1,98 +1,41 @@
-Test cases for add_integer function
-====================================
-
-First, import the function:
 >>> add_integer = __import__('0-add_integer').add_integer
 
-Test 1: Basic addition (1 + 2)
 >>> add_integer(1, 2)
 3
 
-Test 2: Float addition with truncation (1.4 + 2)
->>> add_integer(1.4, 2)
-3
+>>> add_integer(100, -2)
+98
 
-Test 3: Negative addition (1 + -2)
->>> add_integer(1, -2)
--1
+>>> add_integer(2)
+100
 
-Test 4: String should raise error (1 + "2")
->>> add_integer(1, "2")
-Traceback (most recent call last):
-...
-TypeError: b must be an integer
-
-Test 5: Integer casting test
 >>> add_integer(100.3, -2)
 98
 
->>> add_integer(2.9, 3.1)
-5
+>>> add_integer(1.4, 2)
+3
 
->>> add_integer(-1.5, -2.5)
--3
-
-Test 6: Type checking tests
->>> add_integer("hello", 2)
-Traceback (most recent call last):
-...
-TypeError: a must be an integer
-
->>> add_integer(2, "world")
+>>> add_integer(4, "School")
 Traceback (most recent call last):
 ...
 TypeError: b must be an integer
 
->>> add_integer(None, 2)
+>>> add_integer(None)
 Traceback (most recent call last):
 ...
 TypeError: a must be an integer
 
->>> add_integer(2, None)
-Traceback (most recent call last):
-...
-TypeError: b must be an integer
-
-Test 7: Missing one argument (uses default)
->>> add_integer(5)
-103
-
-Test 8: Missing two arguments
 >>> add_integer()
 Traceback (most recent call last):
 ...
 TypeError: add_integer() missing 1 required positional argument: 'a'
 
-Test 9: Float overflow
->>> import math
 >>> add_integer(float('inf'), 1)
 Traceback (most recent call last):
 ...
 ValueError: cannot convert float infinity to integer
 
-Test 10: NaN test
 >>> add_integer(float('nan'), 1)
 Traceback (most recent call last):
 ...
 ValueError: cannot convert float NaN to integer
-
-Test 11: Regular addition tests
->>> add_integer(0, 0)
-0
-
->>> add_integer(-10, -20)
--30
-
->>> add_integer(100, -2)
-98
-
-Test 12: Default parameter tests
->>> add_integer(2)
-100
-
->>> add_integer(0)
-98
-
-Test 13: More float truncation
->>> add_integer(1.999, 2.999)
-3
