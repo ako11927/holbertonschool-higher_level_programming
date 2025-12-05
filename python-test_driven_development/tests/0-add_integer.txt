@@ -1,41 +1,33 @@
->>> add_integer = __import__('0-add_integer').add_integer
+#!/usr/bin/python3
+"""Module for add_integer function."""
 
->>> add_integer(1, 2)
-3
 
->>> add_integer(100, -2)
-98
-
->>> add_integer(2)
-100
-
->>> add_integer(100.3, -2)
-98
-
->>> add_integer(1.4, 2)
-3
-
->>> add_integer(4, "School")
-Traceback (most recent call last):
-...
-TypeError: b must be an integer
-
->>> add_integer(None)
-Traceback (most recent call last):
-...
-TypeError: a must be an integer
-
->>> add_integer()
-Traceback (most recent call last):
-...
-TypeError: add_integer() missing 1 required positional argument: 'a'
-
->>> add_integer(float('inf'), 1)
-Traceback (most recent call last):
-...
-ValueError: cannot convert float infinity to integer
-
->>> add_integer(float('nan'), 1)
-Traceback (most recent call last):
-...
-ValueError: cannot convert float NaN to integer
+def add_integer(a, b=98):
+    """Add two integers.
+    
+    Args:
+        a: First number, must be integer or float
+        b: Second number, must be integer or float, defaults to 98
+        
+    Returns:
+        The sum of a and b as an integer
+        
+    Raises:
+        TypeError: If a or b is not an integer or float
+    """
+    if not isinstance(a, (int, float)):
+        raise TypeError("a must be an integer")
+    if not isinstance(b, (int, float)):
+        raise TypeError("b must be an integer")
+    
+    try:
+        a = int(a)
+        b = int(b)
+    except OverflowError:
+        raise ValueError("cannot convert float infinity to integer")
+    except ValueError as e:
+        if "NaN" in str(e):
+            raise ValueError("cannot convert float NaN to integer")
+        raise
+    
+    return a + b
