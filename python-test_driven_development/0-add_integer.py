@@ -20,11 +20,8 @@ def add_integer(a, b=98):
     if not isinstance(b, (int, float)):
         raise TypeError("b must be an integer")
     
-    # Cast to integers if they are floats
-    # This will automatically raise ValueError for NaN
-    if isinstance(a, float):
-        a = int(a)
-    if isinstance(b, float):
-        b = int(b)
+    # Cast floats to integers
+    a = int(a) if isinstance(a, float) else a
+    b = int(b) if isinstance(b, float) else b
     
     return a + b

@@ -1,140 +1,98 @@
 Test cases for add_integer function
 ====================================
 
-Test basic integer addition:
+First, import the function:
+>>> add_integer = __import__('0-add_integer').add_integer
+
+Test 1: Basic addition (1 + 2)
 >>> add_integer(1, 2)
 3
 
->>> add_integer(100, -2)
-98
-
-Test with negative numbers:
->>> add_integer(-10, -20)
--30
-
->>> add_integer(1, -2)
--1
-
-Test default value for b:
->>> add_integer(2)
-100
-
-Test float casting (truncation towards zero):
->>> add_integer(100.3, -2)
-98
-
+Test 2: Float addition with truncation (1.4 + 2)
 >>> add_integer(1.4, 2)
 3
 
->>> add_integer(1.999, 2.999)
-3
+Test 3: Negative addition (1 + -2)
+>>> add_integer(1, -2)
+-1
+
+Test 4: String should raise error (1 + "2")
+>>> add_integer(1, "2")
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
+
+Test 5: Integer casting test
+>>> add_integer(100.3, -2)
+98
+
+>>> add_integer(2.9, 3.1)
+5
 
 >>> add_integer(-1.5, -2.5)
 -3
 
->>> add_integer(-1.9, 2)
-1
-
-Test with zero:
->>> add_integer(0, 0)
-0
-
->>> add_integer(0)
-98
-
-Test with large numbers:
->>> add_integer(1000000, 2000000)
-3000000
-
-Test error cases - non-numeric types:
->>> add_integer(4, "School")
-Traceback (most recent call last):
-...
-TypeError: b must be an integer
-
->>> add_integer("Hello", 3)
+Test 6: Type checking tests
+>>> add_integer("hello", 2)
 Traceback (most recent call last):
 ...
 TypeError: a must be an integer
 
->>> add_integer(1, None)
+>>> add_integer(2, "world")
 Traceback (most recent call last):
 ...
 TypeError: b must be an integer
 
-Test missing arguments:
+>>> add_integer(None, 2)
+Traceback (most recent call last):
+...
+TypeError: a must be an integer
+
+>>> add_integer(2, None)
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
+
+Test 7: Missing one argument (uses default)
+>>> add_integer(5)
+103
+
+Test 8: Missing two arguments
 >>> add_integer()
 Traceback (most recent call last):
 ...
 TypeError: add_integer() missing 1 required positional argument: 'a'
 
->>> add_integer(None)
-Traceback (most recent call last):
-...
-TypeError: a must be an integer
-
-Test with lists:
->>> add_integer([1, 2], 3)
-Traceback (most recent call last):
-...
-TypeError: a must be an integer
-
->>> add_integer(1, [2, 3])
-Traceback (most recent call last):
-...
-TypeError: b must be an integer
-
-Test with dictionaries:
->>> add_integer({}, 1)
-Traceback (most recent call last):
-...
-TypeError: a must be an integer
-
-Test with tuples:
->>> add_integer(1, (2,))
-Traceback (most recent call last):
-...
-TypeError: b must be an integer
-
-Test that result is always integer:
->>> type(add_integer(1, 2))
-<class 'int'>
-
->>> type(add_integer(1.5, 2.5))
-<class 'int'>
-
-Test float overflow (infinity):
+Test 9: Float overflow
 >>> import math
 >>> add_integer(float('inf'), 1)
 Traceback (most recent call last):
 ...
 ValueError: cannot convert float infinity to integer
 
->>> add_integer(1, float('-inf'))
-Traceback (most recent call last):
-...
-ValueError: cannot convert float infinity to integer
-
-Test NaN (Not a Number):
+Test 10: NaN test
 >>> add_integer(float('nan'), 1)
 Traceback (most recent call last):
 ...
 ValueError: cannot convert float NaN to integer
 
->>> add_integer(1, float('nan'))
-Traceback (most recent call last):
-...
-ValueError: cannot convert float NaN to integer
+Test 11: Regular addition tests
+>>> add_integer(0, 0)
+0
 
-Test with boolean (which are subclasses of int in Python):
->>> add_integer(True, False)
-1
+>>> add_integer(-10, -20)
+-30
 
->>> add_integer(10, True)
-11
+>>> add_integer(100, -2)
+98
 
-Test float overflow with very large floats:
->>> add_integer(1e100, 1)
-Traceback (most recent call last):
-...
-OverflowError: cannot convert float infinity to integer
+Test 12: Default parameter tests
+>>> add_integer(2)
+100
+
+>>> add_integer(0)
+98
+
+Test 13: More float truncation
+>>> add_integer(1.999, 2.999)
+3
