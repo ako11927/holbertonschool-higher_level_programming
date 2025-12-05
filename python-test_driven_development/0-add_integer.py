@@ -1,41 +1,44 @@
 #!/usr/bin/python3
 """
-This module defines the add_integer function.
-It safely adds two numbers together, ensuring both are integers or floats.
-Invalid float values such as NaN and infinity are also rejected to
-maintain consistent behavior with integer casting.
+This module provides the add_integer function.
+It safely adds two numbers, ensuring they are valid integers or floats.
 """
 
 
 def add_integer(a, b=98):
     """
-    Add two integers, converting floats to integers safely.
+    Add two numbers as integers.
 
     Args:
-        a: First value, must be int or float.
-        b: Second value, must be int or float.
+        a: first number (int or float)
+        b: second number (int or float)
 
     Returns:
-        The integer sum of a and b.
+        int: the sum of a and b
 
     Raises:
-        TypeError: If a or b is not a number or cannot be converted.
+        TypeError: if a or b is not a number or cannot be converted to int
     """
-    # Validate type for a
+
+    # Type check a
     if not isinstance(a, (int, float)):
         raise TypeError("a must be an integer")
 
-    # Validate type for b
+    # Type check b
     if not isinstance(b, (int, float)):
         raise TypeError("b must be an integer")
 
-    # Reject NaN and infinity BEFORE conversion
-    if isinstance(a, float) and (a != a or a in (float('inf'), float('-inf'))):
-        raise TypeError("a must be an integer")
-    if isinstance(b, float) and (b != b or b in (float('inf'), float('-inf'))):
-        raise TypeError("b must be an integer")
+    # Reject NaN or Infinity for a
+    if isinstance(a, float):
+        if a != a or a in (float('inf'), float('-inf')):
+            raise TypeError("a must be an integer")
 
-    # Safe int conversion with error catching
+    # Reject NaN or Infinity for b
+    if isinstance(b, float):
+        if b != b or b in (float('inf'), float('-inf')):
+            raise TypeError("b must be an integer")
+
+    # Safe conversion with error catching (OVERFLOW included)
     try:
         a = int(a)
     except Exception:
