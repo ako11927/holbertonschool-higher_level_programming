@@ -1,13 +1,21 @@
 #!/usr/bin/python3
 """Defines a Rectangle class with square classmethod."""
 
+
 class Rectangle:
-    """Represents a rectangle and can create squares."""
+    """Represents a rectangle with all features including square creation.
+    Attributes:
+        number_of_instances (int): Count of active Rectangle instances.
+        print_symbol (any): Symbol used for string representation.
+    """
+    number_of_instances = 0
+    print_symbol = "#"
 
     def __init__(self, width=0, height=0):
         """Initialize the rectangle with validated width/height."""
         self.width = width
         self.height = height
+        Rectangle.number_of_instances += 1
 
     @property
     def width(self):
@@ -37,9 +45,35 @@ class Rectangle:
             raise ValueError("height must be >= 0")
         self.__height = value
 
+    def area(self):
+        """Return the area of the rectangle."""
+        return self.__width * self.__height
+
+    def perimeter(self):
+        """Return the perimeter of the rectangle."""
+        if self.__width == 0 or self.__height == 0:
+            return 0
+        return 2 * (self.__width + self.__height)
+
+    def __str__(self):
+        """Return the rectangle as a string using print_symbol."""
+        if self.__width == 0 or self.__height == 0:
+            return ""
+        symbol = str(self.print_symbol)
+        lines = [
+            symbol * self.__width
+            for _ in range(self.__height)
+        ]
+        return "\n".join(lines)
+
     def __repr__(self):
-        """Recreatable representation."""
-        return "Rectangle({}, {})".format(self.width, self.height)
+        """Return a string that recreates the rectangle."""
+        return f"Rectangle({self.__width}, {self.__height})"
+
+    def __del__(self):
+        """Destructor that decreases instance count and prints goodbye."""
+        Rectangle.number_of_instances -= 1
+        print("Bye rectangle...")
 
     @classmethod
     def square(cls, size=0):
