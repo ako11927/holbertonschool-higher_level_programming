@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines a Rectangle class with configurable print symbol."""
+"""Defines a Rectangle class with configurable print_symbol."""
 
 class Rectangle:
     """Represents a rectangle.
@@ -17,12 +17,12 @@ class Rectangle:
 
     @property
     def width(self):
-        """Get the width."""
+        """Width getter."""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """Set the width with validation."""
+        """Width setter with validation."""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
@@ -31,12 +31,12 @@ class Rectangle:
 
     @property
     def height(self):
-        """Get the height."""
+        """Height getter."""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """Set the height with validation."""
+        """Height setter with validation."""
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
@@ -44,20 +44,26 @@ class Rectangle:
         self.__height = value
 
     def area(self):
-        """Return the area of the rectangle."""
+        """Return rectangle area."""
         return self.width * self.height
 
     def perimeter(self):
-        """Return the perimeter of the rectangle."""
+        """Return rectangle perimeter (0 if width or height is 0)."""
         if self.width == 0 or self.height == 0:
             return 0
         return 2 * (self.width + self.height)
 
     def __str__(self):
-        """Return the rectangle using the print_symbol."""
+        """Return the rectangle using the print_symbol.
+
+        Uses the instance attribute if set, else falls back to the class
+        attribute. The symbol is converted to string before repeating.
+        """
         if self.width == 0 or self.height == 0:
             return ""
-        symbol = str(self.print_symbol)
+        # Prefer an instance-level symbol if present, otherwise the class-level one
+        symbol = getattr(self, "print_symbol", type(self).print_symbol)
+        symbol = str(symbol)
         line = symbol * self.width
         return "\n".join([line for _ in range(self.height)])
 
