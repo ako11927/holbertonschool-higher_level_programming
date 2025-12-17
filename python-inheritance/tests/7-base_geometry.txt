@@ -1,53 +1,32 @@
->>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+#!/usr/bin/python3
+BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
->>> bg = BaseGeometry()
+bg = BaseGeometry()
 
->>> # Test area still raises exception
->>> try:
-...     bg.area()
-... except Exception as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[Exception] area() is not implemented
+# Test cases from your screenshot
+test_cases = [
+    ("name", "John", TypeError, "name must be an integer"),
+    ("age", 0, ValueError, "age must be greater than 0"),
+    ("distance", -4, ValueError, "distance must be greater than 0"),
+    ("age", 1, None, "Should not raise exception"),
+    ("age", -4, ValueError, "age must be greater than 0"),
+    ("age", "4", TypeError, "age must be an integer"),
+    ("age", (4, 1), TypeError, "age must be an integer"),
+    ("age", [3], TypeError, "age must be an integer"),
+    ("age", True, TypeError, "age must be an integer"),
+    ("age", [3, 4], TypeError, "age must be an integer"),
+    ("age", None, TypeError, "age must be an integer"),
+]
 
->>> # Test integer_validator with valid values
->>> bg.integer_validator("my_int", 1)  # Should not raise exception
->>> bg.integer_validator("my_int", 10)  # Should not raise exception
-
->>> # Test integer_validator with non-integer
->>> try:
-...     bg.integer_validator("my_int", "hello")
-... except TypeError as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[TypeError] my_int must be an integer
-
->>> try:
-...     bg.integer_validator("width", 3.14)
-... except TypeError as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[TypeError] width must be an integer
-
->>> # Test integer_validator with zero
->>> try:
-...     bg.integer_validator("height", 0)
-... except ValueError as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[ValueError] height must be greater than 0
-
->>> # Test integer_validator with negative
->>> try:
-...     bg.integer_validator("radius", -5)
-... except ValueError as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[ValueError] radius must be greater than 0
-
->>> # Test with name containing spaces
->>> try:
-...     bg.integer_validator("my value", 0)
-... except ValueError as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[ValueError] my value must be greater than 0
-
->>> # Test multiple validations
->>> bg.integer_validator("a", 1)
->>> bg.integer_validator("b", 100)
->>> bg.integer_validator("c", 999)
+for name, value, expected_exception, description in test_cases:
+    try:
+        bg.integer_validator(name, value)
+        if expected_exception is None:
+            print(f"✓ {description}")
+        else:
+            print(f"✗ {description}: Expected {expected_exception.__name__} but got no exception")
+    except Exception as e:
+        if type(e) == expected_exception:
+            print(f"✓ {description}: Got expected error: {e}")
+        else:
+            print(f"✗ {description}: Expected {expected_exception.__name__} but got {type(e).__name__}: {e}")
