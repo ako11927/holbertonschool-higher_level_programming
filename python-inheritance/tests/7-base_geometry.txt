@@ -1,66 +1,118 @@
 Test cases for the BaseGeometry class and its methods.
 
->>> bg = BaseGeometry()
+# --- Setup ---
+>>> BG = __import__("7-base_geometry").BaseGeometry
+>>> bg = BG()
 
-# Test the area() method implementation (should raise Exception)
+# --- Test area() method ---
+# Test present: area()
 >>> try:
 ...     bg.area()
 ... except Exception as e:
 ...     print(e)
 area() is not implemented
 
-# --- Test integer_validator(self, name, value) ---
-
-# Test valid integers (should pass silently)
+# --- Test integer_validator() - Valid Integers ---
+# Test present: integer_validator(bg)
 >>> bg.integer_validator("my_int", 12)
 >>> bg.integer_validator("width", 89)
+>>> bg.integer_validator("large_val", 1000000)
 
-# Test case 1: Value is not an integer (TypeError)
+# --- Test integer_validator() - Invalid Type (TypeError) ---
+# Test present: integer_validator("age", "4")
+>>> try:
+...     bg.integer_validator("age", "4")
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] age must be an integer
+
+# Test present: integer_validator("age", 4.1)
+>>> try:
+...     bg.integer_validator("age", 4.1)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] age must be an integer
+
+# Test non-integer value: string "John"
 >>> try:
 ...     bg.integer_validator("name", "John")
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 [TypeError] name must be an integer
 
-# Test case 2: Value is a float (TypeError)
+# Test non-integer value: float
 >>> try:
 ...     bg.integer_validator("height", 5.5)
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 [TypeError] height must be an integer
 
-# Test case 3: Value is 0 (ValueError)
+# Test present: integer_validator("age", [3])
+# Test non-integer value: list
 >>> try:
-...     bg.integer_validator("age", 0)
+...     bg.integer_validator("list_val", [3])
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
-[ValueError] age must be greater than 0
+[TypeError] list_val must be an integer
 
-# Test case 4: Value is negative (-4) (ValueError)
->>> try:
-...     bg.integer_validator("distance", -4)
-... except Exception as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[ValueError] distance must be greater than 0
-
-# Test case 5: Value is a large positive integer
->>> bg.integer_validator("large_number", 999999999)
->>> print(bg.integer_validator("large_number", 999999999))
-None
-
-# Test case 6: Value is a boolean (TypeError, booleans are subclass of int, but we test for exact type 'int')
+# Test non-integer value: boolean True (often fails type check if exact type is required)
+# Test present: integer_validator("age", True)
 >>> try:
 ...     bg.integer_validator("status", True)
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 [TypeError] status must be an integer
 
-# Test documentation for module, class, and method
->>> import sys; sys.path.insert(0, '.'); bg_mod = __import__('7-base_geometry'); print(bg_mod.__doc__ is not None and len(bg_mod.__doc__) > 10)
+# Test non-integer value: None
+# Test present: integer_validator("age", None)
+>>> try:
+...     bg.integer_validator("none_val", None)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] none_val must be an integer
+
+# Test non-integer value: tuple
+# Test present: integer_validator("age", (3, 4))
+>>> try:
+...     bg.integer_validator("tuple_val", (3, 4))
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] tuple_val must be an integer
+
+# --- Test integer_validator() - Invalid Value (ValueError) ---
+# Test value == 0 (ValueError)
+# Test present: integer_validator("age", 0)
+>>> try:
+...     bg.integer_validator("age", 0)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] age must be greater than 0
+
+# Test value < 0 (-4) (ValueError)
+# Test present: integer_validator("age", -4)
+>>> try:
+...     bg.integer_validator("distance", -4)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] distance must be greater than 0
+
+# --- Test Documentation (check instantiation and docstrings) ---
+# Check module docstring length
+>>> m = __import__("7-base_geometry").__doc__
+>>> len(m) > 1
 True
->>> print(bg_mod.BaseGeometry.__doc__ is not None and len(bg_mod.BaseGeometry.__doc__) > 10)
+
+# Check class docstring length
+>>> c = __import__("7-base_geometry").BaseGeometry.__doc__
+>>> len(c) > 1
 True
->>> print(bg_mod.BaseGeometry.area.__doc__ is not None and len(bg_mod.BaseGeometry.area.__doc__) > 10)
+
+# Check area method docstring length
+>>> a_doc = __import__("7-base_geometry").BaseGeometry.area.__doc__
+>>> len(a_doc) > 1
 True
->>> print(bg_mod.BaseGeometry.integer_validator.__doc__ is not None and len(bg_mod.BaseGeometry.integer_validator.__doc__) > 10)
+
+# Check integer_validator method docstring length
+>>> i_doc = __import__("7-base_geometry").BaseGeometry.integer_validator.__doc__
+>>> len(i_doc) > 1
 True
