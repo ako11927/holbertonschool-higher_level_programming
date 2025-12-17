@@ -1,0 +1,63 @@
+>>> MyList = __import__('1-my_list').MyList
+
+>>> # Test empty list
+>>> ml = MyList()
+>>> ml.print_sorted()
+[]
+
+>>> # Test single element
+>>> ml = MyList()
+>>> ml.append(5)
+>>> ml.print_sorted()
+[5]
+
+>>> # Test multiple elements
+>>> ml = MyList()
+>>> ml.append(1)
+>>> ml.append(4)
+>>> ml.append(2)
+>>> ml.append(3)
+>>> ml.append(5)
+>>> print(ml)
+[1, 4, 2, 3, 5]
+>>> ml.print_sorted()
+[1, 2, 3, 4, 5]
+>>> print(ml)
+[1, 4, 2, 3, 5]
+
+>>> # Test with negative numbers
+>>> ml = MyList()
+>>> ml.append(-5)
+>>> ml.append(10)
+>>> ml.append(0)
+>>> ml.append(-1)
+>>> ml.print_sorted()
+[-5, -1, 0, 10]
+
+>>> # Test that original list is not modified
+>>> ml = MyList()
+>>> ml.append(3)
+>>> ml.append(1)
+>>> ml.append(2)
+>>> original = ml[:]  # copy
+>>> ml.print_sorted()
+[1, 2, 3]
+>>> ml == original
+True
+
+>>> # Test inheritance
+>>> isinstance(ml, list)
+True
+>>> issubclass(MyList, list)
+True
+
+>>> # Test list methods still work
+>>> ml = MyList()
+>>> ml.append(1)
+>>> ml.extend([2, 3])
+>>> len(ml)
+3
+>>> ml.pop()
+3
+>>> ml
+[1, 2]

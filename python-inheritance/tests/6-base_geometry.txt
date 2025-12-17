@@ -1,0 +1,58 @@
+>>> BaseGeometry = __import__('6-base_geometry').BaseGeometry
+
+>>> # Test instantiation
+>>> bg = BaseGeometry()
+>>> isinstance(bg, BaseGeometry)
+True
+
+>>> # Test area method exists
+>>> hasattr(bg, 'area')
+True
+>>> callable(bg.area)
+True
+
+>>> # Test area method raises exception
+>>> import sys
+>>> try:
+...     bg.area()
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[Exception] area() is not implemented
+
+>>> # Test with multiple instances
+>>> bg1 = BaseGeometry()
+>>> bg2 = BaseGeometry()
+>>> try:
+...     bg1.area()
+... except Exception as e:
+...     message1 = str(e)
+>>> try:
+...     bg2.area()
+... except Exception as e:
+...     message2 = str(e)
+>>> message1 == message2
+True
+>>> message1
+'area() is not implemented'
+
+>>> # Test area is a method, not property
+>>> import inspect
+>>> inspect.ismethod(bg.area)
+True
+
+>>> # Test class hierarchy
+>>> issubclass(BaseGeometry, object)
+True
+
+>>> # Test inheritance can work
+>>> class Rectangle(BaseGeometry):
+...     def __init__(self, width, height):
+...         self.width = width
+...         self.height = height
+...     def area(self):
+...         return self.width * self.height
+>>> r = Rectangle(3, 4)
+>>> r.area()
+12
+>>> isinstance(r, BaseGeometry)
+True

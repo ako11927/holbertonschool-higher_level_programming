@@ -1,0 +1,76 @@
+>>> is_kind_of_class = __import__('3-is_kind_of_class').is_kind_of_class
+
+>>> # Test with int
+>>> a = 1
+>>> is_kind_of_class(a, int)
+True
+>>> is_kind_of_class(a, float)
+False
+>>> is_kind_of_class(a, object)
+True
+
+>>> # Test with float
+>>> b = 3.14
+>>> is_kind_of_class(b, float)
+True
+>>> is_kind_of_class(b, object)
+True
+
+>>> # Test with string
+>>> c = "hello"
+>>> is_kind_of_class(c, str)
+True
+>>> is_kind_of_class(c, object)
+True
+
+>>> # Test with custom classes and inheritance
+>>> class Animal:
+...     pass
+>>> class Dog(Animal):
+...     pass
+>>> class Cat(Animal):
+...     pass
+>>> dog = Dog()
+>>> is_kind_of_class(dog, Dog)
+True
+>>> is_kind_of_class(dog, Animal)
+True
+>>> is_kind_of_class(dog, object)
+True
+>>> is_kind_of_class(dog, Cat)
+False
+
+>>> # Test with bool (which inherits from int)
+>>> is_kind_of_class(True, bool)
+True
+>>> is_kind_of_class(True, int)
+True
+>>> is_kind_of_class(True, object)
+True
+
+>>> # Test with None
+>>> is_kind_of_class(None, type(None))
+True
+>>> is_kind_of_class(None, object)
+True
+
+>>> # Test with list
+>>> lst = [1, 2, 3]
+>>> is_kind_of_class(lst, list)
+True
+>>> is_kind_of_class(lst, object)
+True
+
+>>> # Test with tuple
+>>> tup = (1, 2, 3)
+>>> is_kind_of_class(tup, tuple)
+True
+>>> is_kind_of_class(tup, object)
+True
+
+>>> # Test with dict
+>>> d = {"a": 1}
+>>> is_kind_of_class(d, dict)
+True
+>>> is_kind_of_class(d, object)
+True

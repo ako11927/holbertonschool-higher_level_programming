@@ -1,0 +1,65 @@
+>>> is_same_class = __import__('2-is_same_class').is_same_class
+
+>>> # Test with int
+>>> a = 1
+>>> is_same_class(a, int)
+True
+>>> is_same_class(a, float)
+False
+>>> is_same_class(a, object)
+False
+
+>>> # Test with float
+>>> b = 3.14
+>>> is_same_class(b, float)
+True
+>>> is_same_class(b, int)
+False
+
+>>> # Test with string
+>>> c = "hello"
+>>> is_same_class(c, str)
+True
+>>> is_same_class(c, object)
+False
+
+>>> # Test with list
+>>> d = [1, 2, 3]
+>>> is_same_class(d, list)
+True
+>>> is_same_class(d, tuple)
+False
+
+>>> # Test with custom class
+>>> class TestClass:
+...     pass
+>>> obj = TestClass()
+>>> is_same_class(obj, TestClass)
+True
+>>> is_same_class(obj, object)
+False
+
+>>> # Test inheritance
+>>> class Parent:
+...     pass
+>>> class Child(Parent):
+...     pass
+>>> child = Child()
+>>> is_same_class(child, Child)
+True
+>>> is_same_class(child, Parent)
+False
+>>> is_same_class(child, object)
+False
+
+>>> # Test with None
+>>> is_same_class(None, type(None))
+True
+>>> is_same_class(None, object)
+False
+
+>>> # Test with bool
+>>> is_same_class(True, bool)
+True
+>>> is_same_class(True, int)
+False

@@ -1,0 +1,35 @@
+>>> BaseGeometry = __import__('5-base_geometry').BaseGeometry
+
+>>> # Test instantiation
+>>> bg = BaseGeometry()
+>>> isinstance(bg, BaseGeometry)
+True
+>>> isinstance(bg, object)
+True
+
+>>> # Test class attributes
+>>> hasattr(BaseGeometry, '__doc__')
+True
+>>> hasattr(bg, '__class__')
+True
+>>> hasattr(bg, '__dict__')
+True
+
+>>> # Test it's an empty class (task 5 should be empty)
+>>> dir_bg = dir(bg)
+>>> 'area' in dir_bg  # Task 5 should NOT have area method
+False
+
+>>> # Test multiple instances
+>>> bg1 = BaseGeometry()
+>>> bg2 = BaseGeometry()
+>>> bg1 is not bg2
+True
+>>> type(bg1) == type(bg2)
+True
+
+>>> # Test class hierarchy
+>>> issubclass(BaseGeometry, object)
+True
+>>> BaseGeometry.__bases__
+(<class 'object'>,)

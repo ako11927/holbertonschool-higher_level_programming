@@ -1,0 +1,79 @@
+>>> inherits_from = __import__('4-inherits_from').inherits_from
+
+>>> # Test with bool (inherits from int)
+>>> a = True
+>>> inherits_from(a, int)
+True
+>>> inherits_from(a, bool)
+False
+>>> inherits_from(a, object)
+True
+
+>>> # Test with custom inheritance chain
+>>> class Animal:
+...     pass
+>>> class Mammal(Animal):
+...     pass
+>>> class Dog(Mammal):
+...     pass
+>>> class Cat(Mammal):
+...     pass
+>>> dog = Dog()
+>>> inherits_from(dog, Dog)
+False
+>>> inherits_from(dog, Mammal)
+True
+>>> inherits_from(dog, Animal)
+True
+>>> inherits_from(dog, object)
+True
+>>> inherits_from(dog, Cat)
+False
+
+>>> # Test with int (doesn't inherit from anything except object)
+>>> b = 5
+>>> inherits_from(b, int)
+False
+>>> inherits_from(b, float)
+False
+>>> inherits_from(b, object)
+True
+
+>>> # Test with list
+>>> c = [1, 2, 3]
+>>> inherits_from(c, list)
+False
+>>> inherits_from(c, object)
+True
+
+>>> # Test with custom class that doesn't inherit
+>>> class Standalone:
+...     pass
+>>> obj = Standalone()
+>>> inherits_from(obj, Standalone)
+False
+>>> inherits_from(obj, object)
+True
+
+>>> # Test with None
+>>> inherits_from(None, type(None))
+False
+>>> inherits_from(None, object)
+True
+
+>>> # Test multiple inheritance
+>>> class A:
+...     pass
+>>> class B:
+...     pass
+>>> class C(A, B):
+...     pass
+>>> c_obj = C()
+>>> inherits_from(c_obj, A)
+True
+>>> inherits_from(c_obj, B)
+True
+>>> inherits_from(c_obj, C)
+False
+>>> inherits_from(c_obj, object)
+True

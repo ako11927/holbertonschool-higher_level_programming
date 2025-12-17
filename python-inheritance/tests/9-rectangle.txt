@@ -1,0 +1,54 @@
+>>> Rectangle = __import__('9-rectangle').Rectangle
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+>>> # Test valid rectangle
+>>> r = Rectangle(3, 4)
+>>> isinstance(r, Rectangle)
+True
+>>> issubclass(Rectangle, BaseGeometry)
+True
+
+>>> # Test area method
+>>> r.area()
+12
+
+>>> # Test area with different dimensions
+>>> r2 = Rectangle(5, 10)
+>>> r2.area()
+50
+
+>>> # Test __str__ method
+>>> print(r)
+[Rectangle] 3/4
+
+>>> print(r2)
+[Rectangle] 5/10
+
+>>> # Test string representation
+>>> str(r)
+'[Rectangle] 3/4'
+
+>>> # Test validation still works
+>>> try:
+...     r3 = Rectangle(-1, 5)
+... except ValueError as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] width must be greater than 0
+
+>>> try:
+...     r3 = Rectangle(5, "five")
+... except TypeError as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] height must be an integer
+
+>>> # Test integer_validator still accessible
+>>> r.integer_validator("test", 99)  # Should not raise exception
+
+>>> # Test multiple methods together
+>>> r = Rectangle(6, 8)
+>>> r.area()
+48
+>>> str(r)
+'[Rectangle] 6/8'
+>>> print(r)
+[Rectangle] 6/8
