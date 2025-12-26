@@ -1,9 +1,13 @@
 #!/usr/bin/python3
+"""Task 1: Shapes, Interfaces, and Duck Typing"""
+
 from abc import ABC, abstractmethod
 import math
 
 
 class Shape(ABC):
+    """Shape class"""
+    
     @abstractmethod
     def area(self):
         pass
@@ -14,6 +18,8 @@ class Shape(ABC):
 
 
 class Circle(Shape):
+    """Circle class"""
+    
     def __init__(self, radius):
         self.radius = radius
     
@@ -25,6 +31,8 @@ class Circle(Shape):
 
 
 class Rectangle(Shape):
+    """Rectangle class"""
+    
     def __init__(self, width, height):
         self.width = width
         self.height = height
@@ -37,5 +45,6 @@ class Rectangle(Shape):
 
 
 def shape_info(shape):
-    print("Area: {}".format(shape.area()))
-    print("Perimeter: {}".format(shape.perimeter()))
+    """Print shape info"""
+    print(f"Area: {shape.area()}")
+    print(f"Perimeter: {shape.perimeter()}")
