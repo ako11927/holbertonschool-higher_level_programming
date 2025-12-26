@@ -47,8 +47,8 @@ class Rectangle(Shape):
 
 
 def shape_info(shape):
-    """Print area and perimeter"""
-    # CRITICAL: Must NOT check type, just call methods
-    # This is pure duck typing
+    """Print area and perimeter using duck typing"""
+    # Pure duck typing - we try to call the methods
+    # If they don't exist, Python will raise AttributeError naturally
     print("Area: {}".format(shape.area()))
     print("Perimeter: {}".format(shape.perimeter()))
