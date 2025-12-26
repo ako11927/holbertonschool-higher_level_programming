@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines Shape abstract class and concrete Circle and Rectangle classes"""
+"""Defines geometric shapes"""
 
 from abc import ABC, abstractmethod
 import math
@@ -46,10 +46,10 @@ class Rectangle(Shape):
         return 2 * (self.width + self.height)
 
 
-def shape_info(shape):
+def shape_info(obj):
     """
     Prints the area and perimeter of a shape
     Uses duck typing (no isinstance checks)
     """
-    print(f"Area: {shape.area()}")
-    print(f"Perimeter: {shape.perimeter()}")
+    print(f"Area: {obj.area()}")
+    print(f"Perimeter: {obj.perimeter()}")
