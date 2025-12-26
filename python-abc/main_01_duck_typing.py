@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 from task_01_duck_typing import Circle, Rectangle, shape_info
 
-class TestDuck:
-    def area(self):
-        return 123
-    def perimeter(self):
-        return 456
+circle = Circle(radius=5)
+rectangle = Rectangle(width=4, height=7)
 
-td = TestDuck()
-shape_info(td)
-"
+shape_info(circle)
+shape_info(rectangle)
