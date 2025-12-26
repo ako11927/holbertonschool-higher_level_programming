@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Defines Shape abstract class and concrete Circle and Rectangle classes"""
 
 from abc import ABC, abstractmethod
