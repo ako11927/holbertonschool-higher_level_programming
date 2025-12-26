@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 """Defines geometric shapes"""
-
 from abc import ABC, abstractmethod
 import math
-
 
 class Shape(ABC):
     """Abstract base class for shapes"""
@@ -18,7 +16,6 @@ class Shape(ABC):
         """Return the perimeter of the shape"""
         pass
 
-
 class Circle(Shape):
     """Circle shape"""
 
@@ -30,7 +27,6 @@ class Circle(Shape):
 
     def perimeter(self):
         return 2 * math.pi * self.radius
-
 
 class Rectangle(Shape):
     """Rectangle shape"""
@@ -44,7 +40,6 @@ class Rectangle(Shape):
 
     def perimeter(self):
         return 2 * (self.width + self.height)
-
 
 def shape_info(obj):
     """
