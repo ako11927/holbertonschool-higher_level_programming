@@ -10,10 +10,12 @@ class Shape(ABC):
     
     @abstractmethod
     def area(self):
+        """Return area"""
         pass
     
     @abstractmethod
     def perimeter(self):
+        """Return perimeter"""
         pass
 
 
@@ -45,10 +47,6 @@ class Rectangle(Shape):
 
 
 def shape_info(shape):
-    """Print area and perimeter - PURE duck typing"""
-    # This is the key: we don't care if shape is a Shape instance
-    # We only care that it has area() and perimeter() methods
-    a = shape.area()
-    p = shape.perimeter()
-    print("Area: {}".format(a))
-    print("Perimeter: {}".format(p))
+    """Print area and perimeter"""
+    print("Area: {}".format(shape.area()))
+    print("Perimeter: {}".format(shape.perimeter()))
