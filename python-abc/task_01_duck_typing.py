@@ -1,20 +1,27 @@
 #!/usr/bin/python3
+"""Task 1: Shapes, Interfaces, and Duck Typing"""
 
 from abc import ABC, abstractmethod
 import math
 
 
 class Shape(ABC):
+    """Shape class"""
+    
     @abstractmethod
     def area(self):
+        """Area method"""
         pass
     
     @abstractmethod
     def perimeter(self):
+        """Perimeter method"""
         pass
 
 
 class Circle(Shape):
+    """Circle class"""
+    
     def __init__(self, radius):
         self.radius = radius
     
@@ -26,6 +33,8 @@ class Circle(Shape):
 
 
 class Rectangle(Shape):
+    """Rectangle class"""
+    
     def __init__(self, width, height):
         self.width = width
         self.height = height
@@ -38,5 +47,8 @@ class Rectangle(Shape):
 
 
 def shape_info(shape):
+    """Print area and perimeter"""
+    # CRITICAL: Must NOT check type, just call methods
+    # This is pure duck typing
     print("Area: {}".format(shape.area()))
     print("Perimeter: {}".format(shape.perimeter()))
