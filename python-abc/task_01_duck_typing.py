@@ -9,12 +9,12 @@ import math
 
 class Shape(ABC):
     """Shape class"""
-    
+
     @abstractmethod
     def area(self):
         """area method"""
         pass
-    
+
     @abstractmethod
     def perimeter(self):
         """perimeter method"""
@@ -23,15 +23,15 @@ class Shape(ABC):
 
 class Circle(Shape):
     """Circle class"""
-    
+
     def __init__(self, radius):
         """Initialize circle"""
         self.radius = radius
-    
+
     def area(self):
         """Return area"""
         return math.pi * self.radius ** 2
-    
+
     def perimeter(self):
         """Return perimeter"""
         return 2 * math.pi * self.radius
@@ -39,16 +39,16 @@ class Circle(Shape):
 
 class Rectangle(Shape):
     """Rectangle class"""
-    
+
     def __init__(self, width, height):
         """Initialize rectangle"""
         self.width = width
         self.height = height
-    
+
     def area(self):
         """Return area"""
         return self.width * self.height
-    
+
     def perimeter(self):
         """Return perimeter"""
         return 2 * (self.width + self.height)
