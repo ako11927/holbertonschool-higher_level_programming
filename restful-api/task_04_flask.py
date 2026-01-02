@@ -7,11 +7,8 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# In-memory storage for users
-users = {
-    "jane": {"username": "jane", "name": "Jane", "age": 28, "city": "Los Angeles"},
-    "john": {"username": "john", "name": "John", "age": 30, "city": "New York"}
-}
+# Start with empty users dictionary
+users = {}
 
 @app.route('/')
 def home():
@@ -20,9 +17,8 @@ def home():
 
 @app.route('/data')
 def get_data():
-    """Return all usernames"""
-    usernames = list(users.keys())
-    return jsonify(usernames)
+    """Return all usernames as JSON array"""
+    return jsonify(list(users.keys()))
 
 @app.route('/status')
 def get_status():
@@ -39,12 +35,12 @@ def get_user(username):
 
 @app.route('/add_user', methods=['POST'])
 def add_user():
-    """Add a new user"""
+    """Add a new user - handles POST requests"""
     try:
-        # Try to parse JSON data
-        data = request.get_json()
+        # Get JSON data from request
+        data = request.get_json(force=True, silent=True)
         
-        # Check if request body is valid JSON
+        # Check if JSON is valid
         if data is None:
             return jsonify({"error": "Invalid JSON"}), 400
         
@@ -58,21 +54,21 @@ def add_user():
         if username in users:
             return jsonify({"error": "Username already exists"}), 409
         
-        # Create new user object with all fields
-        new_user = {
+        # Create user object with provided data
+        user_data = {
             "username": username,
             "name": data.get("name", ""),
             "age": data.get("age"),
             "city": data.get("city", "")
         }
         
-        # Add user to the dictionary
-        users[username] = new_user
+        # Add user to dictionary
+        users[username] = user_data
         
         # Return success response
         return jsonify({
             "message": "User added",
-            "user": new_user
+            "user": user_data
         }), 201
         
     except Exception:
