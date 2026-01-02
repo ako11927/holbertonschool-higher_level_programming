@@ -30,7 +30,7 @@ class SimpleAPIHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
             
             # Create JSON response
-            response_data = {"name": "Ahmed", "age": 36, "city": "Riyadh"}
+            response_data = {"name": "John", "age": 30, "city": "New York"}
             response_json = json.dumps(response_data)
             self.wfile.write(response_json.encode('utf-8'))
         
