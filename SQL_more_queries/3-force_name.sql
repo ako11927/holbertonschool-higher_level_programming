@@ -1,2 +1,2 @@
--- List all tables with db name forced
-SELECT name FROM force_name WHERE 1=1;
+-- Create force_name table
+CREATE TABLE IF NOT EXISTS force_name (name VARCHAR(256) NOT NULL);
