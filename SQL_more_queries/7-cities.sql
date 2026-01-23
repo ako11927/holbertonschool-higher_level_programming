@@ -1,4 +1,4 @@
--- Create cities table with FOREIGN KEY to states
+-- Create cities table
 CREATE TABLE IF NOT EXISTS cities (
     id INT UNIQUE NOT NULL AUTO_INCREMENT PRIMARY KEY,
     state_id INT NOT NULL,
