@@ -10,7 +10,6 @@ if __name__ == "__main__":
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
-    
     # Connect to the database
     db = MySQLdb.connect(
         host="localhost",
@@ -19,20 +18,15 @@ if __name__ == "__main__":
         passwd=password,
         db=database
     )
-    
     # Create a cursor object
     cursor = db.cursor()
-    
     # Execute the query
     cursor.execute("SELECT * FROM states ORDER BY id ASC")
-    
     # Fetch all rows
     rows = cursor.fetchall()
-    
     # Print each row
     for row in rows:
         print(row)
-    
     # Close cursor and database connection
     cursor.close()
     db.close()
