@@ -11,7 +11,7 @@ if __name__ == "__main__":
     password = sys.argv[2]
     database = sys.argv[3]
     state_name = sys.argv[4]
-    
+
     # Connect to the database
     db = MySQLdb.connect(
         host="localhost",
@@ -20,10 +20,10 @@ if __name__ == "__main__":
         passwd=password,
         db=database
     )
-    
+
     # Create a cursor object
     cursor = db.cursor()
-    
+
     # Execute the query with parameterized input for safety
     query = """
     SELECT cities.name
@@ -33,14 +33,14 @@ if __name__ == "__main__":
     ORDER BY cities.id ASC
     """
     cursor.execute(query, (state_name,))
-    
+
     # Fetch all rows
     rows = cursor.fetchall()
-    
+
     # Extract city names and join them with comma and space
     city_names = [row[0] for row in rows]
     print(", ".join(city_names))
-    
+
     # Close cursor and database connection
     cursor.close()
     db.close()
