@@ -1,0 +1,44 @@
+{% include 'header.html' %}
+
+<h1>Contact Us</h1>
+<p>We'd love to hear from you! Here's how you can get in touch with us.</p>
+
+<h2>Contact Information</h2>
+<ul>
+    <li><strong>Email:</strong> contact@myflaskapp.com</li>
+    <li><strong>Phone:</strong> (123) 456-7890</li>
+    <li><strong>Address:</strong> 123 Web Development Street, Code City, PC 10101</li>
+</ul>
+
+<h2>Business Hours</h2>
+<ul>
+    <li>Monday - Friday: 9:00 AM - 6:00 PM</li>
+    <li>Saturday: 10:00 AM - 4:00 PM</li>
+    <li>Sunday: Closed</li>
+</ul>
+
+<h2>Send Us a Message</h2>
+<form style="max-width: 600px; margin-top: 20px;">
+    <div style="margin-bottom: 15px;">
+        <label for="name" style="display: block; margin-bottom: 5px; font-weight: bold;">Name:</label>
+        <input type="text" id="name" name="name" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+        <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold;">Email:</label>
+        <input type="email" id="email" name="email" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+        <label for="message" style="display: block; margin-bottom: 5px; font-weight: bold;">Message:</label>
+        <textarea id="message" name="message" rows="5" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+    </div>
+    
+    <button type="submit" style="background-color: #4a6fa5; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+        Send Message
+    </button>
+</form>
+
+<p style="margin-top: 30px;">We typically respond to all inquiries within 24-48 hours during business days.</p>
+
+{% include 'footer.html' %}
