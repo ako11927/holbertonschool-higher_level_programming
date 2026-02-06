@@ -1,5 +1,3 @@
-cat > items.json << 'EOF'
 {
     "items": ["Python Book", "Flask Mug", "Jinja Sticker"]
 }
-EOF
