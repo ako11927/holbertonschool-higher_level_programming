@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 Flask application to display product data from JSON or CSV files.
@@ -75,8 +76,9 @@ def display_products():
             filtered_products = [p for p in products if p.get('id') == product_id_int]
             
             if not filtered_products:
+                # Return exact error message as specified in requirements
                 return render_template('product_display.html',
-                                     error=f"Product with id {product_id} not found.")
+                                     error="Product not found")
             
             products = filtered_products
         except ValueError:
@@ -92,40 +94,6 @@ def display_products():
                          products=products, 
                          source=source,
                          product_id=product_id)
-
-
-@app.route('/test')
-def test_page():
-    """Test page with example URLs."""
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head><title>Test URLs</title></head>
-    <body>
-        <h1>Test Product Display</h1>
-        <h2>JSON Examples:</h2>
-        <ul>
-            <li><a href="/products?source=json">All JSON products</a></li>
-            <li><a href="/products?source=json&id=1">JSON product id=1</a></li>
-            <li><a href="/products?source=json&id=999">JSON product id=999 (not found)</a></li>
-        </ul>
-        
-        <h2>CSV Examples:</h2>
-        <ul>
-            <li><a href="/products?source=csv">All CSV products</a></li>
-            <li><a href="/products?source=csv&id=2">CSV product id=2</a></li>
-            <li><a href="/products?source=csv&id=999">CSV product id=999 (not found)</a></li>
-        </ul>
-        
-        <h2>Error Examples:</h2>
-        <ul>
-            <li><a href="/products?source=xml">Invalid source (xml)</a></li>
-            <li><a href="/products?source=json&id=abc">Invalid id (abc)</a></li>
-            <li><a href="/products">Missing source parameter</a></li>
-        </ul>
-    </body>
-    </html>
-    """
 
 
 if __name__ == '__main__':
